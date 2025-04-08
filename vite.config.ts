@@ -7,9 +7,6 @@ import path from 'path';
 dotenv.config();
 
 export default defineConfig({
-	build: {
-		outDir: 'build',
-	},
 	plugins: [react(), svgr()],
 	define: {
 		'process.env.REACT_APP_BASE_URL': JSON.stringify(
