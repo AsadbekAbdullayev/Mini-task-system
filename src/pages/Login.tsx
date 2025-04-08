@@ -36,6 +36,10 @@ const Login = () => {
 				<Form.Item label="Parol" name="password" rules={[{ required: true }]}>
 					<Input.Password />
 				</Form.Item>
+				<div className="w-full flex items-center mb-2">
+					<Input type="checkbox" className="w-fit mr-1 cursor-pointer" />
+					Eslab qolish
+				</div>
 				<Form.Item>
 					<Button htmlType="submit" type="primary" block loading={loading}>
 						Kirish

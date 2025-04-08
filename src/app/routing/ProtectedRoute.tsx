@@ -4,8 +4,10 @@
 // import { setUserDetails } from '@redux/slices/generelSlice';
 // import { useEffect } from 'react';
 // import { jwtDecode } from 'jwt-decode';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import { message } from 'antd';
+
+import { useEffect } from 'react';
 
 interface DecodedToken {
 	role: string;
@@ -15,7 +17,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 	// const { data, isLoading, refetch } = useProfile();
 	// const dispatch = useDispatch();
 	// const token = localStorage.getItem('token');
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	// useEffect(() => {
 	// 	token && window?.location?.pathname.includes('profile') && refetch();
@@ -77,7 +79,11 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 	// 	navigate('/login');
 	// 	return <Navigate to="/login" />;
 	// }
-
+	useEffect(() => {
+		if (localStorage.getItem('auth')) {
+			navigate('/login');
+		}
+	}, [localStorage.getItem('auth')]);
 	return <>{children}</>;
 };
 

@@ -1,11 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 type Theme = 'light' | 'dark';
 interface UserDetails {
-	id: number | null;
 	firstName: string | null;
 	lastName: string | null;
-	username: string | null;
-	email: string | null;
 	profilePhoto: string | null;
 }
 
@@ -26,11 +23,8 @@ interface GeneralState {
 const initialState: GeneralState = {
 	data: {},
 	userDetails: {
-		id: null,
 		firstName: null,
 		lastName: null,
-		username: null,
-		email: null,
 		profilePhoto: null,
 	},
 	theme: (localStorage.getItem('theme') as Theme) || 'light',
@@ -66,6 +60,11 @@ const generalSlice = createSlice({
 	},
 });
 
-export const { changeState, toggleTheme, setTheme, setUserDetails, clearBreadcrumb } =
-	generalSlice.actions;
+export const {
+	changeState,
+	toggleTheme,
+	setTheme,
+	setUserDetails,
+	clearBreadcrumb,
+} = generalSlice.actions;
 export default generalSlice.reducer;

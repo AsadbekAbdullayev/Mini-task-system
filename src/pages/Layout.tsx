@@ -1,69 +1,69 @@
-import { Layout, Menu, Button, Popconfirm, Popover, Radio, Input } from 'antd';
+import { useEffect, useState } from 'react';
+import { Layout, Menu, Button, Popconfirm, Popover, Avatar } from 'antd';
 import {
 	PieChartOutlined,
 	DollarOutlined,
 	LogoutOutlined,
 	MenuFoldOutlined,
 	MenuUnfoldOutlined,
-	EyeOutlined,
-	SunOutlined,
-	MoonOutlined,
+	UserOutlined,
+	SketchOutlined,
 } from '@ant-design/icons';
 import { useNavigate, useLocation, Outlet } from 'react-router-dom';
-import { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
-
-const { Sider, Content, Header } = Layout;
-const { Search } = Input;
-
+import { RootState } from '@/redux/store/store';
+import { setUserDetails } from '@redux/slices/generelSlice';
+import { useDispatch, useSelector } from 'react-redux';
+const { Sider, Header } = Layout;
 const AppLayout = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [collapsed, setCollapsed] = useState(false);
 	const { theme, toggleTheme, fontSize, setFontSize } = useTheme();
 	const [searchTerm, setSearchTerm] = useState('');
+	const { userDetails } = useSelector((state: RootState) => state.generel);
+	const { firstName, lastName, profilePhoto } = userDetails;
+	const dispatch = useDispatch();
 
 	const handleMenu = (key: string) => {
 		if (key === 'logout') {
 			localStorage.removeItem('auth');
-			navigate('/');
+			navigate('/login');
 		} else {
 			navigate(`/${key}`);
 		}
 	};
 
-	const handleFontSizeChange = (size: 'small' | 'normal' | 'large') => {
-		setFontSize(size);
-	};
-
-	const fontSizeContent = (
+	const AdminContent = (
 		<div>
-			<Radio.Group
-				onChange={(e) => handleFontSizeChange(e.target.value)}
-				value={fontSize}
-			>
-				<Radio.Button
-					value="small"
-					style={{ fontSize: '16px', fontWeight: 'bold' }}
-				>
-					A-
-				</Radio.Button>
-				<Radio.Button
-					value="normal"
-					style={{ fontSize: '16px', fontWeight: 'bold' }}
-				>
-					A
-				</Radio.Button>
-				<Radio.Button
-					value="large"
-					style={{ fontSize: '16px', fontWeight: 'bold' }}
-				>
-					A+
-				</Radio.Button>
-			</Radio.Group>
+			<Menu
+				mode="inline"
+				items={[
+					{
+						key: 'profile',
+						icon: <UserOutlined />,
+						label: 'Profile',
+						onClick: () => navigate('/profile'),
+					},
+					{
+						key: 'logout',
+						icon: <LogoutOutlined style={{ color: 'red' }} />,
+						label: (
+							<Popconfirm
+								title="Are you sure you want to logout?"
+								onConfirm={() => handleMenu('logout')}
+								okText="Yes"
+								cancelText="No"
+								className="text-red-500"
+							>
+								Logout
+							</Popconfirm>
+						),
+					},
+				]}
+			/>
 		</div>
 	);
-
 	// Recursive function to filter menu items and sub-items
 	const filterMenuItems: any = (menuItems: any[], search: string) => {
 		return menuItems
@@ -88,24 +88,35 @@ const AppLayout = () => {
 			label: 'Dashboard',
 		},
 		{
-			key: 'expenses',
+			key: 'ticket',
 			icon: <DollarOutlined />,
-			label: 'Xarajatlar',
-			// children: [
-			// 	{
-			// 		key: 'expenses/sub1',
-			// 		label: 'Submenu 1',
-			// 	},
-			// 	{
-			// 		key: 'expenses/sub2',
-			// 		label: 'Submenu 2',
-			// 	},
-			// ],
+			label: 'My Ticket',
+		},
+		{
+			key: 'archive',
+			icon: <SketchOutlined />,
+			label: 'Archived Tickets',
+		},
+		{
+			key: 'profile',
+			icon: <UserOutlined />,
+			label: 'Profile',
 		},
 	];
 
 	const filteredMenuItems = filterMenuItems(menuItems, searchTerm); // Apply search filter to menu items
-
+	useEffect(() => {
+		const userData = JSON.parse(localStorage.getItem('userProfile') || '{}');
+		if (userData) {
+			dispatch(
+				setUserDetails({
+					firstName: userData.name,
+					lastName: userData.surname,
+					profilePhoto: userData.avatar,
+				}),
+			);
+		}
+	}, []);
 	return (
 		<Layout style={{ minHeight: '100vh' }}>
 			<Sider
@@ -113,20 +124,13 @@ const AppLayout = () => {
 				collapsible
 				collapsed={collapsed}
 				breakpoint="md"
+				style={{ borderRight: '1px solid #eaeaea' }}
 				onCollapse={(value) => setCollapsed(value)}
 			>
-				<div className="text-white text-center py-4 font-bold text-lg">
-					{collapsed ? 'UH' : 'Uy Hisobi'}
-				</div>
-
-				{/* Search input */}
-				<div className="px-4 py-2">
-					<Search
-						placeholder="Menularni qidirish..."
-						onSearch={(value) => setSearchTerm(value)}
-						onChange={(e) => setSearchTerm(e.target.value)}
-						value={searchTerm}
-					/>
+				<div className="w-full flex items-center justify-center py-9">
+					<h1 className="text-[#2e99fd] text-lg font-semibold ">
+						{collapsed ? 'TS' : 'TICKET SYSTEM'}
+					</h1>
 				</div>
 
 				{/* Filtered nested Menu */}
@@ -136,28 +140,6 @@ const AppLayout = () => {
 					selectedKeys={[location.pathname.replace('/', '')]}
 					onClick={(e) => handleMenu(e.key)}
 					items={filteredMenuItems}
-				/>
-
-				<Menu
-					theme={theme}
-					mode="inline"
-					className="absolute bottom-[50px] w-full"
-					items={[
-						{
-							key: 'logout',
-							icon: <LogoutOutlined />,
-							label: (
-								<Popconfirm
-									title="Are you sure you want to logout?"
-									onConfirm={() => handleMenu('logout')}
-									okText="Yes"
-									cancelText="No"
-								>
-									Logout
-								</Popconfirm>
-							),
-						},
-					]}
 				/>
 			</Sider>
 
@@ -172,25 +154,38 @@ const AppLayout = () => {
 					<h2 className="text-lg font-semibold">Admin Panel</h2>
 
 					<div className="flex items-center gap-5 pr-5">
-						<Button onClick={toggleTheme} className="ml-4">
-							{theme === 'dark' ? <SunOutlined /> : <MoonOutlined />}
-						</Button>
-
-						{/* Font Size Popover */}
 						<Popover
-							content={fontSizeContent}
-							title="Text Size"
+							content={AdminContent}
 							trigger="click"
 							placement="bottomRight"
 						>
-							<Button icon={<EyeOutlined />} />
+							<div className="flex items-center pr-1 justify-center gap-2 cursor-pointer">
+								{profilePhoto ? (
+									<Avatar
+										size={40}
+										src={profilePhoto}
+										icon={<UserOutlined />}
+									/>
+								) : (
+									<div className="w-[40px] h-[40px] p-1 rounded-full border flex items-center justify-center">
+										<UserOutlined className="text-[20px] " />
+									</div>
+								)}
+								{firstName ? (
+									<span className="text-lg font-semibold">
+										{`${firstName}. ${lastName?.slice(0, 1).toUpperCase()}`}
+									</span>
+								) : (
+									<span className="text-lg font-semibold">Admin</span>
+								)}
+							</div>
 						</Popover>
 					</div>
 				</Header>
 
-				<Content className="p-4 bg-white overflow-auto border">
+				<div className="overflow-auto w-full max-h-[calc(100v-200px)] bg-[#e0f7fa]">
 					<Outlet />
-				</Content>
+				</div>
 			</Layout>
 		</Layout>
 	);
