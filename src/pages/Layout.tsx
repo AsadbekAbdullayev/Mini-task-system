@@ -151,7 +151,7 @@ const AppLayout = () => {
 						onClick={() => setCollapsed(!collapsed)}
 						className="md:hidden"
 					/>
-					<h2 className="text-lg font-semibold">Admin Panel</h2>
+					<h2 className="text-lg font-semibold">Personal cabinet</h2>
 
 					<div className="flex items-center gap-5 pr-5">
 						<Popover
