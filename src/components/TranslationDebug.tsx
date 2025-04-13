@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next';
 
 export const TranslationDebug = () => {
   const { t, i18n } = useTranslation('common');
-
   return (
     <div style={{ display: 'none' }}>
       <div>Root level: {t('my_students')}</div>
