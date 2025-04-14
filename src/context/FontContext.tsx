@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
-
 type FontSize = 'small' | 'normal' | 'large';
 
 interface FontContextType {
