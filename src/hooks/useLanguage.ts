@@ -7,6 +7,7 @@ export const useLanguage = () => {
   
 
   
+  
   const changeLanguage = (lang: 'en' | 'uz' | 'ru') => {
     i18n.changeLanguage(lang);
     // Optionally save to localStorage
