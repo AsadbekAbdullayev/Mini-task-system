@@ -12,14 +12,6 @@ import {
 } from 'antd';
 
 
-
-
-
-
-
-
-
-
 import {
 	EditOutlined,
 	DeleteOutlined,
