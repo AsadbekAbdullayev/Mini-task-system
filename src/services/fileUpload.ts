@@ -1,13 +1,6 @@
 import { message } from 'antd';
 import axios from 'axios';
 
-
-
-
-
-
-
-
 // ✅ Define API Response Type
 interface UploadResponse {
 	data: string; // API returns { data: "uploaded_file_url" }
