@@ -3,6 +3,7 @@ import { toggleTheme } from '@redux/slices/generelSlice';
 import { RootState } from '@redux/store/store';
 import { useEffect } from 'react';
 
+
 export const useThemeToggle = () => {
 	const dispatch = useDispatch();
 	const { theme } = useSelector((state: RootState) => state.generel);
