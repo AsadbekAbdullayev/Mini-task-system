@@ -9,8 +9,6 @@ import MyTickets from './../../pages/MyTickets';
 import TicketInfo from './../../pages/TicketInfo';
 import AppLayout from '@/pages/Layout';
 
-
-
 const PrivateRoute = ({ children }: any) => {
 	const isAuth = localStorage.getItem('auth') === 'true'; // Agar autentifikatsiya qilingan bo'lsa
 	return isAuth ? children : <Navigate to="/login" />; // Agar autentifikatsiya qilinmagan bo'lsa, login sahifasiga yo'naltiradi
