@@ -3,7 +3,7 @@ export const TranslationDebug = () => {
   const { t, i18n } = useTranslation('common');
 
 
-  
+
   
   return (
     <div style={{ display: 'none' }}>
