@@ -2,8 +2,4 @@ build
 node_modules
 .husky
 !.build
-
-
-
-
 .build/*
