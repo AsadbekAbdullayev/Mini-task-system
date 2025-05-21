@@ -6,6 +6,7 @@ interface RouteData {
 	component: React.LazyExoticComponent<React.ComponentType<any>>;
 }
 
+
 export const Data: RouteData[] = [
 	{
 		id: 1,
