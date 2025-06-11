@@ -4,6 +4,7 @@ const Home = lazy(() => import('@pages/Home'));
 
 
 
+
 interface RouteData {
 	id: number;
 	path: string;
