@@ -1,7 +1,6 @@
 // context/ThemeContext.tsx
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
-
 // Interface for the context value
 interface ThemeContextType {
 	theme: 'light' | 'dark';
