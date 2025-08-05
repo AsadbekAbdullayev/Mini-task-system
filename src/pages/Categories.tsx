@@ -1,11 +1,4 @@
 // pages/Expenses.tsx
-
-
-
-
-
-
-
 import {
 	Button,
 	Form,
