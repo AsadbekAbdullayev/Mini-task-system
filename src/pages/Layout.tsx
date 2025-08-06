@@ -14,6 +14,7 @@ import { useTheme } from '../context/ThemeContext';
 import { RootState } from '@/redux/store/store';
 import { setUserDetails } from '@redux/slices/generelSlice';
 import { useDispatch, useSelector } from 'react-redux';
+
 const { Sider, Header } = Layout;
 const AppLayout = () => {
 	const navigate = useNavigate();
