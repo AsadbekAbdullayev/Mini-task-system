@@ -1,7 +1,9 @@
 // pages/Login.tsx
-import { Button, Form, Input, message } from 'antd';
+import { Form, Input, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { Theme, Button } from 'react-daisyui';
+
 const Login = () => {
 	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
@@ -35,15 +37,9 @@ const Login = () => {
 				<Form.Item label="Parol" name="password" rules={[{ required: true }]}>
 					<Input.Password />
 				</Form.Item>
-				<div className="w-full flex items-center mb-2">
-					<Input type="checkbox" className="w-fit mr-1 cursor-pointer" />
-					Eslab qolish
+				<div className="w-full flex justify-center">
+					<button className="btn w-full btn-primary btn-xl">Kirish</button>
 				</div>
-				<Form.Item>
-					<Button htmlType="submit" type="primary" block loading={loading}>
-						Kirish
-					</Button>
-				</Form.Item>
 			</Form>
 		</div>
 	);
