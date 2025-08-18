@@ -10,6 +10,7 @@
 
 
 
+
 * **Project and Board Management:** Create and manage multiple projects with customizable boards to visualize your team's workflow.
 * **Issue Tracking:** Create different types of issues (e.g., Task, Bug, Story) with detailed descriptions, priority levels, assignees, and due dates.
 * **Kanban-style Boards:** Drag and drop issues between columns to reflect their current status (e.g., To Do, In Progress, Done).
