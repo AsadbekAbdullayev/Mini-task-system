@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Layout, Menu, Button, Popconfirm, Popover, Avatar } from 'antd';
+import { useNavigate, useLocation, Outlet } from 'react-router-dom';
+import { setUserDetails } from '@redux/slices/generelSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useTheme } from '../context/ThemeContext';
+import { RootState } from '@/redux/store/store';
 import {
 	PieChartOutlined,
 	DollarOutlined,
@@ -7,23 +12,18 @@ import {
 	MenuFoldOutlined,
 	MenuUnfoldOutlined,
 	UserOutlined,
-	SketchOutlined,
 } from '@ant-design/icons';
-import { useNavigate, useLocation, Outlet } from 'react-router-dom';
-import { useTheme } from '../context/ThemeContext';
-import { RootState } from '@/redux/store/store';
-import { setUserDetails } from '@redux/slices/generelSlice';
-import { useDispatch, useSelector } from 'react-redux';
 
 const { Sider, Header } = Layout;
+
 const AppLayout = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [collapsed, setCollapsed] = useState(false);
-	const { theme, toggleTheme, fontSize, setFontSize } = useTheme();
+	const { theme } = useTheme();
 	const [searchTerm, setSearchTerm] = useState('');
 	const { userDetails } = useSelector((state: RootState) => state.generel);
-	const { firstName, lastName, profilePhoto } = userDetails;
+	const { name, photoURL } = userDetails;
 	const dispatch = useDispatch();
 
 	const handleMenu = (key: string) => {
@@ -40,12 +40,6 @@ const AppLayout = () => {
 			<Menu
 				mode="inline"
 				items={[
-					{
-						key: 'profile',
-						icon: <UserOutlined />,
-						label: 'Profile',
-						onClick: () => navigate('/profile'),
-					},
 					{
 						key: 'logout',
 						icon: <LogoutOutlined style={{ color: 'red' }} />,
@@ -93,31 +87,10 @@ const AppLayout = () => {
 			icon: <DollarOutlined />,
 			label: 'My Ticket',
 		},
-		{
-			key: 'archive',
-			icon: <SketchOutlined />,
-			label: 'Archived Tickets',
-		},
-		{
-			key: 'profile',
-			icon: <UserOutlined />,
-			label: 'Profile',
-		},
 	];
 
 	const filteredMenuItems = filterMenuItems(menuItems, searchTerm); // Apply search filter to menu items
-	useEffect(() => {
-		const userData = JSON.parse(localStorage.getItem('userProfile') || '{}');
-		if (userData) {
-			dispatch(
-				setUserDetails({
-					firstName: userData.name,
-					lastName: userData.surname,
-					profilePhoto: userData.avatar,
-				}),
-			);
-		}
-	}, []);
+
 	return (
 		<Layout style={{ minHeight: '100vh' }}>
 			<Sider
@@ -161,21 +134,15 @@ const AppLayout = () => {
 							placement="bottomRight"
 						>
 							<div className="flex items-center pr-1 justify-center gap-2 cursor-pointer">
-								{profilePhoto ? (
-									<Avatar
-										size={40}
-										src={profilePhoto}
-										icon={<UserOutlined />}
-									/>
+								{photoURL ? (
+									<Avatar size={40} src={photoURL} icon={<UserOutlined />} />
 								) : (
 									<div className="w-[40px] h-[40px] p-1 rounded-full border flex items-center justify-center">
 										<UserOutlined className="text-[20px] " />
 									</div>
 								)}
-								{firstName ? (
-									<span className="text-lg font-semibold">
-										{`${firstName}. ${lastName?.slice(0, 1).toUpperCase()}`}
-									</span>
+								{name ? (
+									<span className="text-lg font-semibold">{`${name}`}</span>
 								) : (
 									<span className="text-lg font-semibold">Admin</span>
 								)}

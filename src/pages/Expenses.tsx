@@ -127,7 +127,7 @@ const Expenses = () => {
 	];
 
 	return (
-		<div className="h-[calc(100vh-70px)] p-4 bg-[#e0f7fa]">
+		<div className="h-[calc(100vh-65px)] p-4 bg-[#e0f7fa]">
 			<Button type="primary" onClick={() => openModal()} className="mb-4">
 				Xarajat qo‘shish
 			</Button>

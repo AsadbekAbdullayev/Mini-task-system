@@ -1,18 +1,13 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './../../context/ThemeContext';
 import { FontSizeProvider } from './../../context/FontContext';
-import Login from './../../pages/Login';
-import Dashboard from './../../pages/Dashboard';
-import ArchivedTicket from './../../pages/ArchivedTicket';
-import Profile from './../../pages/Profile';
-import MyTickets from './../../pages/MyTickets';
+import PrivateRoute from '@/providers/ProtectedRoute';
 import TicketInfo from './../../pages/TicketInfo';
-import AppLayout from '@/pages/Layout';
-
-const PrivateRoute = ({ children }: any) => {
-	const isAuth = localStorage.getItem('auth') === 'true'; // Agar autentifikatsiya qilingan bo'lsa
-	return isAuth ? children : <Navigate to="/login" />; // Agar autentifikatsiya qilinmagan bo'lsa, login sahifasiga yo'naltiradi
-};
+import Dashboard from '@/pages/Dashboard';
+import Profile from './../../pages/Profile';
+import MyTickets from '@/pages/Ticket';
+import Login from '@/pages/Login';
+import AppLayout from '@/layout';
 
 function App() {
 	return (
@@ -37,7 +32,6 @@ function App() {
 							<Route path="dashboard" element={<Dashboard />} />
 							<Route path="ticket" element={<MyTickets />} />
 							<Route path="/ticket/:id" element={<TicketInfo />} />
-							<Route path="archive" element={<ArchivedTicket />} />
 							<Route path="profile" element={<Profile />} />
 						</Route>
 					</Routes>

@@ -1,36 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-type Theme = 'light' | 'dark';
-interface UserDetails {
-	firstName: string | null;
-	lastName: string | null;
-	profilePhoto: string | null;
-}
 
-interface Breadcrumb {
-	title: string;
-	href?: string;
+interface UserDetails {
+	id?: string | null;
+	name: string | null;
+	email: string | null;
+	photoURL?: string | null;
+	createdAt?: Date | null;
 }
 
 interface GeneralState {
-	data: Record<string, any>;
-	theme: Theme;
 	userDetails: UserDetails;
-	navbarTitle: string;
-	breadcrumb: Breadcrumb[];
-	totalCount: number | null;
 }
 
 const initialState: GeneralState = {
-	data: {},
 	userDetails: {
-		firstName: null,
-		lastName: null,
-		profilePhoto: null,
+		id: null,
+		name: null,
+		email: null,
+		photoURL: null,
+		createdAt: null,
 	},
-	theme: (localStorage.getItem('theme') as Theme) || 'light',
-	navbarTitle: '',
-	breadcrumb: [],
-	totalCount: 0,
 };
 
 const generalSlice = createSlice({
@@ -43,28 +32,11 @@ const generalSlice = createSlice({
 		) => {
 			(state[action.payload.name] as any) = action.payload.value;
 		},
-		toggleTheme: (state) => {
-			state.theme = state.theme === 'light' ? 'dark' : 'light';
-			localStorage.setItem('theme', state.theme);
-		},
-		setTheme: (state, action: PayloadAction<Theme>) => {
-			state.theme = action.payload;
-			localStorage.setItem('theme', state.theme);
-		},
 		setUserDetails: (state, action: PayloadAction<UserDetails>) => {
 			state.userDetails = action.payload;
-		},
-		clearBreadcrumb: (state) => {
-			state.breadcrumb = [];
 		},
 	},
 });
 
-export const {
-	changeState,
-	toggleTheme,
-	setTheme,
-	setUserDetails,
-	clearBreadcrumb,
-} = generalSlice.actions;
+export const { changeState, setUserDetails } = generalSlice.actions;
 export default generalSlice.reducer;
