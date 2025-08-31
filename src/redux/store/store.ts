@@ -1,10 +1,8 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import generelReducer from '../slices/generelSlice';
-import courseReducer from '../slices/courseSlice';
 
 const reducers = combineReducers({
 	generel: generelReducer,
-	course: courseReducer,
 });
 
 export default configureStore({
