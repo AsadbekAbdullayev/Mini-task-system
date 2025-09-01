@@ -3,6 +3,10 @@
 		{
 			"source": "/(.*)",
 			"destination": "/index.html"
+		},
+		{
+			"source": "/__/auth/(.*)",
+			"destination": "https://trackify-2727.firebaseapp.com/__/auth/$1"
 		}
 	]
 }
