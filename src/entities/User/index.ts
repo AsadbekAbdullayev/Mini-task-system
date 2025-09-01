@@ -1,6 +1,5 @@
-// src/entities/users.ts
-import { useMutation, useQuery } from 'react-query';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { useMutation, useQuery } from 'react-query';
 import { db } from '@/firebaseConfig';
 
 // Interface

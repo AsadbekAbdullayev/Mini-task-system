@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { setUserDetails } from '@redux/slices/generelSlice';
 import { useMeMutation } from '@/entities/User';
 import { useNavigate } from 'react-router-dom';

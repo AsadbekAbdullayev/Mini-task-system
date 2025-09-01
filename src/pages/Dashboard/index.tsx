@@ -112,11 +112,6 @@ const Dashboard = () => {
 				data: [{ x: 'Tickets', y: statusCounts.cancel }],
 				color: '#ff3131',
 			},
-			{
-				name: 'Archive',
-				data: [{ x: 'Tickets', y: statusCounts.archive }],
-				color: '#fb9a99',
-			},
 		],
 		xaxis: { categories: ['Tickets'] },
 		legend: { position: 'top' },
@@ -125,7 +120,7 @@ const Dashboard = () => {
 
 	const donutChartConfig = {
 		chart: { type: 'donut' },
-		labels: ['Todo', 'Doing', 'Done', 'Cancel', 'Archive'],
+		labels: ['Todo', 'Doing', 'Done', 'Cancel'],
 		series: [
 			statusCounts.todo,
 			statusCounts.doing,
@@ -201,12 +196,6 @@ const Dashboard = () => {
 						onClick={() => handleAddTicket('cancel')}
 					>
 						Add Cancel
-					</Button>
-					<Button
-						className="bg-[#fb9a99] text-white"
-						onClick={() => handleAddTicket('archive')}
-					>
-						Add Archive
 					</Button>
 				</div>
 			</Card>

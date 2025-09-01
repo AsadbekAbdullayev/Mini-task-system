@@ -1,4 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { Ticket } from '@/constants/types';
+import { db } from '@/firebaseConfig';
 import {
 	collection,
 	addDoc,
@@ -10,9 +12,6 @@ import {
 	query,
 	where,
 } from 'firebase/firestore';
-
-import { db } from '../../firebaseConfig';
-import { Ticket } from '../../constants/types';
 
 // GET tickets (faqat userga tegishli)
 export const getTickets = async () => {
