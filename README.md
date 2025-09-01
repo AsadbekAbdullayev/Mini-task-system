@@ -25,5 +25,5 @@ It is built with **React**, **Node.js**, and other cutting-edge technologies to 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/your-startup.git
+   git clone [https://github.com/your-username/your-startup.git](https://github.com/AsadbekAbdullayev/Trackify)
    ```
