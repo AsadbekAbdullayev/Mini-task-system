@@ -1,7 +1,7 @@
-import { Loader } from '@/shared/ui';
-import { useAuth } from '@/hooks/auth';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '@/hooks/auth';
+import { Loader } from '@/shared/ui';
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 	const { pathname } = useLocation();

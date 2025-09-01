@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
-import { useDrag } from 'react-dnd';
-import { useNavigate } from 'react-router-dom';
-import { Ticket, TicketStatus } from '@/constants/types';
-import { Card, Select, Button, Tooltip, Popconfirm } from 'antd';
 import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
+import { Card, Select, Button, Tooltip, Popconfirm } from 'antd';
+import { Ticket, TicketStatus } from '@/constants/types';
+import { useNavigate } from 'react-router-dom';
+import { useDrag } from 'react-dnd';
 
 const { Option } = Select;
 

@@ -1,5 +1,4 @@
-import Loader from './Loader';
-import Table from './Table';
 import TicketCard from './TicketCard';
+import Loader from './Loader';
 
-export { Loader, Table, TicketCard };
+export { Loader, TicketCard };

@@ -15,11 +15,9 @@ const Login = () => {
 		setLoading(true);
 		try {
 			const result = await signInWithPopup(auth, githubAuthProvider);
-			// GitHub access token
 			const credential = GithubAuthProvider.credentialFromResult(result);
 			const token = credential?.accessToken;
 
-			// User info
 			const user = result.user;
 
 			const userDetails = {
@@ -33,12 +31,11 @@ const Login = () => {
 			await createUserIfNotExists(userDetails);
 			localStorage.setItem('user_uid', user.uid);
 			message.success('Login successful!');
-			navigate('/');
+			navigate('/dashboard');
 			return { user, token };
 		} catch (error: any) {
 			console.error('GitHub login error:', error);
 			setLoading(false);
-
 			throw error;
 		} finally {
 			setLoading(false);
@@ -46,13 +43,15 @@ const Login = () => {
 	};
 
 	return (
-		<div className="relative min-h-screen flex flex-col justify-center items-center px-2">
-			{/* Animated background */}
-			<div className="absolute top-0 left-0 w-full h-full animate-gradientBackground z-0"></div>
+		<div className="relative min-h-screen flex flex-col justify-center items-center px-2 bg-gradient-to-br from-[#474646]  to-[#0c111b] animate-gradientBackground">
+			{/* Overlay effect like home page */}
+			<div className="absolute inset-0 bg-black/30 z-0"></div>
 
 			{/* Login content */}
-			<div className="relative z-10 flex flex-col items-center gap-2">
-				<h2 className="text-xl font-semibold mb-4">Welcome Back! Sign In</h2>
+			<div className="relative z-10 flex flex-col items-center gap-4 bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-2xl">
+				<h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-[#30F2F2] to-purple-400 bg-clip-text text-transparent">
+					Welcome Back! Sign In
+				</h2>
 
 				<button
 					className="btn w-full max-w-52 btn-primary btn-xl flex items-center"
@@ -66,7 +65,7 @@ const Login = () => {
 								indicator={
 									<Loading3QuartersOutlined className="text-gray-950 mr-1 animate-spin !font-bold" />
 								}
-							/>{' '}
+							/>
 							Loading...
 						</>
 					) : (

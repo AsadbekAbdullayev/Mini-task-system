@@ -1,11 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './routing/routes';
-import './styles/index.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ConfigProvider } from 'antd';
+import ReactDOM from 'react-dom/client';
 import store from '@redux/store/store';
 import { Provider } from 'react-redux';
+import { ConfigProvider } from 'antd';
+import App from './routing/routes';
+import './styles/index.css';
+
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
