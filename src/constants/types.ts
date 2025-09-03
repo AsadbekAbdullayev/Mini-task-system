@@ -2,6 +2,7 @@
 export type TicketStatus = 'TODO' | 'DOING' | 'DONE' | 'CANCELED';
 
 
+
 export interface Ticket {
 	id?: string;
 	title: string;
