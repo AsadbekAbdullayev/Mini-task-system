@@ -2,12 +2,6 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { useMutation, useQuery } from 'react-query';
 import { db } from '@/firebaseConfig';
 
-
-
-
-
-
-
 // Interface
 export interface UserDetail {
 	id: string | null;
